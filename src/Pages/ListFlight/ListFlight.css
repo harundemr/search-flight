@@ -1,0 +1,52 @@
+.content-list {
+    background-color: white;
+    min-height: 100vh;
+    color:#063048;
+}
+
+.header-list {
+    border-bottom: 1px solid #063048;
+    display: flex;
+    justify-content: space-between;
+    margin:16px;
+}
+
+.main {
+    width: 100vh;
+    margin: auto;
+    height: 100vh;
+    text-align: left;
+    padding: 16px;
+}
+
+.btn-ucus {
+    background-color: #E81932;
+    color:white;
+    border:none;
+    border-radius: 2px;
+    padding:4px;
+    font-size:12px;
+    width: 100px;
+}
+
+.sort-bar {
+    background-color: #063048;
+    text-align: right;
+    color: white;
+    padding: 8px;
+    font-size:16px;
+    border-radius: 4px;
+}
+
+.btn-sort {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 4px;
+    margin-left: 8px;
+    color:white;
+    padding:4px 16px;
+}
+
+.list-flights {
+    background-color: #f9f9f9;
+}
