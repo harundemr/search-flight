@@ -7,6 +7,8 @@ class SubCategory extends React.Component {
         super(props);
 
         this.data = this.props.item;
+        this.cabin = this.props.cabin;
+        console.log(this.props.getPromoCode)
     }
 
     render() {
@@ -15,7 +17,11 @@ class SubCategory extends React.Component {
                 <div className='sub-category-header'>
                     <div>{this.data.brandCode}</div>
                     <div>
-                        {this.data.price.currency + ' ' +this.data.price.amount}
+                        {
+                            this.props.getPromoCode && this.cabin === 'economy' && this.data.brandCode === 'ecoFly' ?
+                            this.data.price.currency + ' ' + this.data.price.amount/2 
+                            : this.data.price.currency + ' ' + this.data.price.amount
+                        }
                     </div>
                 </div>
                 <div className='rights'>
@@ -29,9 +35,20 @@ class SubCategory extends React.Component {
                         })
                     }
                 </div>
-                <button className='btn-choose-flight'>Uçuşu Seç</button>
+                {
+                    !this.props.getPromoCode ?
+                        <button className='btn-choose-flight' onClick={this.onClickChooseFlight}>Uçuşu Seç</button>
+                        : this.cabin === 'economy' && this.data.brandCode === 'ecoFly' ?
+                            <button className='btn-choose-flight' onClick={this.onClickChooseFlight}>Uçuşu Seç</button>
+                            : <button className='btn-choose-flight' disabled>Uçuşu Seç</button>
+                }
+
             </div>
         );
+    }
+
+    onClickChooseFlight() {
+        alert('tes');
     }
 
 }

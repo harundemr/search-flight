@@ -53,9 +53,14 @@ class Flight extends React.Component {
                             <div>Yolcu başına</div>
                             <b>
                                 {
-                                    this.data.fareCategories.ECONOMY.subcategories[0].price.currency
-                                    + ' ' +
-                                    this.data.fareCategories.ECONOMY.subcategories[0].price.amount
+                                    this.props.getPromoCode ?
+                                        this.data.fareCategories.ECONOMY.subcategories[0].price.currency
+                                        + ' ' +
+                                        this.data.fareCategories.ECONOMY.subcategories[0].price.amount / 2
+                                        :
+                                        this.data.fareCategories.ECONOMY.subcategories[0].price.currency
+                                        + ' ' +
+                                        this.data.fareCategories.ECONOMY.subcategories[0].price.amount
                                 }
                             </b>
                         </div>
@@ -87,9 +92,15 @@ class Flight extends React.Component {
                     this.state.detailShow ?
                         <div className='sub-categories'>
                             {
-                                this.data.fareCategories.ECONOMY.subcategories.map(category => {
-                                    return (<SubCategory item={category} />);
-                                })
+                                this.state.cabin.includes('economy') ?
+                                    this.data.fareCategories.ECONOMY.subcategories.map(category => {
+
+                                        return (<SubCategory item={category} key={category.brandCode} cabin={'economy'} getPromoCode={this.props.getPromoCode} />);
+                                    })
+                                    :
+                                    this.data.fareCategories.BUSINESS.subcategories.map(category => {
+                                        return (<SubCategory item={category} key={category.brandCode} cabin={'business'} getPromoCode={this.props.getPromoCode} />);
+                                    })
                             }
                         </div> : null
                 }
@@ -98,12 +109,14 @@ class Flight extends React.Component {
     }
 
     onChangeRadio(event) {
-        if (event.target.value === ("economy" + this.data.id)) {
+        this.setState({
+            cabin: event.target.value,
+            detailShow: false
+        }, () => {
             this.setState({
-                cabin: event.target.value,
                 detailShow: true
-            });
-        }
+            })
+        });
     }
 }
 
