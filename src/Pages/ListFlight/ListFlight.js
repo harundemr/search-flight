@@ -1,5 +1,5 @@
 import './ListFlight.css';
-import React, { useState, setState } from 'react';
+import React from 'react';
 import Flights from '../../Data/flights.json';
 import Flight from '../../Components/Flight/Flight';
 
@@ -66,7 +66,8 @@ class ListFlight extends React.Component {
                                         item={flight}
                                         onChangeRadio={this.onChangeRadio}
                                         getDetailShow={this.getDetailShow}
-                                        getPromoCode={this.getPromoCode} />
+                                        getPromoCode={this.getPromoCode}
+                                        navigate={this.props.navigate} />
                                 );
                             })
                         }

@@ -1,5 +1,5 @@
 import './SubCategory.css';
-import React, { useState, setState } from 'react';
+import React from 'react';
 
 class SubCategory extends React.Component {
 
@@ -8,7 +8,8 @@ class SubCategory extends React.Component {
 
         this.data = this.props.item;
         this.cabin = this.props.cabin;
-        console.log(this.props.getPromoCode)
+
+        this.onClickChooseFlight = this.onClickChooseFlight.bind(this);
     }
 
     render() {
@@ -19,16 +20,16 @@ class SubCategory extends React.Component {
                     <div>
                         {
                             this.props.getPromoCode && this.cabin === 'economy' && this.data.brandCode === 'ecoFly' ?
-                            this.data.price.currency + ' ' + this.data.price.amount/2 
-                            : this.data.price.currency + ' ' + this.data.price.amount
+                                this.data.price.currency + ' ' + this.data.price.amount / 2
+                                : this.data.price.currency + ' ' + this.data.price.amount
                         }
                     </div>
                 </div>
                 <div className='rights'>
                     {
-                        this.data.rights.map(right => {
+                        this.data.rights.map((right, index) => {
                             return (
-                                <div className='right-item'>
+                                <div className='right-item' key={index}>
                                     {right}
                                 </div>
                             );
@@ -48,7 +49,7 @@ class SubCategory extends React.Component {
     }
 
     onClickChooseFlight() {
-        alert('tes');
+        this.props.navigate(true);
     }
 
 }

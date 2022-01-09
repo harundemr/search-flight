@@ -1,5 +1,5 @@
 import './Flight.css';
-import React, { useState, setState } from 'react';
+import React from 'react';
 import SubCategory from '../SubCategory/SubCategory';
 
 class Flight extends React.Component {
@@ -40,7 +40,7 @@ class Flight extends React.Component {
                                 name="cabin"
                                 value={"economy" + this.data.id}
                                 onChange={this.props.onChangeRadio} />
-                            <label for={"economy-radio" + this.data.id}>ECONOMY</label>
+                            <label htmlFor={"economy-radio" + this.data.id}>ECONOMY</label>
                         </div>
                         <div className='economy-price'>
                             <div>Yolcu başına</div>
@@ -66,7 +66,7 @@ class Flight extends React.Component {
                                 name="cabin"
                                 value={"business" + this.data.id}
                                 onChange={this.props.onChangeRadio} />
-                            <label for={"business-radio" + this.data.id}>BUSINESS</label>
+                            <label htmlFor={"business-radio" + this.data.id}>BUSINESS</label>
                         </div>
                         <div className='business-price'>
                             <div>Yolcu başına</div>
@@ -93,7 +93,8 @@ class Flight extends React.Component {
                                                 item={category}
                                                 key={category.brandCode}
                                                 cabin={'economy'}
-                                                getPromoCode={this.props.getPromoCode} />);
+                                                getPromoCode={this.props.getPromoCode}
+                                                navigate={this.props.navigate} />);
                                     })
                                 }
                             </div>
@@ -107,7 +108,8 @@ class Flight extends React.Component {
                                                     item={category}
                                                     key={category.brandCode}
                                                     cabin={'business'}
-                                                    getPromoCode={this.props.getPromoCode} />);
+                                                    getPromoCode={this.props.getPromoCode}
+                                                    navigate={this.props.navigate} />);
                                         })
                                     }
                                 </div> : null

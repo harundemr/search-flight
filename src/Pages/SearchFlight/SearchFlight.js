@@ -1,4 +1,4 @@
-import React, { useState, setState } from 'react';
+import React from 'react';
 import './SearchFlight.css';
 
 class SearchFlight extends React.Component {
@@ -38,7 +38,7 @@ class SearchFlight extends React.Component {
                                 <i className="fas fa-plane-departure" ></i>
                             </div>
                             <div className='port-wrapper'>
-                                <input id="where-from" type="text" placeholder='Nereden' value="Istanbul" />
+                                <input id="where-from" type="text" placeholder='Nereden' defaultValue="Istanbul" />
                             </div>
                         </div>
                         <div className='to-where-container'>
@@ -46,7 +46,7 @@ class SearchFlight extends React.Component {
                                 <i className="fas fa-plane-arrival"></i>
                             </div>
                             <div className='port-wrapper'>
-                                <input id="to-where" type="text" placeholder='Nereye' value="Antalya"/>
+                                <input id="to-where" type="text" placeholder='Nereye' defaultValue="Antalya"/>
                             </div>
                         </div>
                         <div className='date-container'>

@@ -1,0 +1,24 @@
+.main-completion {
+    width: 60vw;
+    margin: auto;
+    text-align: left;
+    padding: 8px;
+}
+.complated {
+
+}
+
+.total {
+    font-size: 25px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.total > .title {
+    font-weight: lighter;
+}
+
+.total > .amount {
+    font-weight: bold;
+    color:darkblue;
+}

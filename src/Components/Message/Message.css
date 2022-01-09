@@ -1,0 +1,32 @@
+
+.message {
+    padding: 15px 0px;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.fa-check-circle {
+    color: rgb(35, 211, 64);
+}
+
+.fa-times-circle {
+    color: red;
+}
+
+.content {
+    margin-left: 16px;
+    font-weight: bold;
+}
+
+.return-back {
+    text-align: right;
+    padding:8px;
+}
+
+.return-back > button {
+    width: 100px;
+    padding: 8px;
+    color: white;
+    border: none;
+    background-color: #E81932;
+    cursor: pointer;
+}
