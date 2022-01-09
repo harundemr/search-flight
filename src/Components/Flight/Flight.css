@@ -1,0 +1,104 @@
+.row {
+    display: flex;
+    margin:8px;
+}
+
+.flight {
+    flex:3;
+    margin:4px;
+    padding: 8px;
+    display: flex;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.05);
+}
+
+.route{
+    display: flex;
+    flex: 3;
+}
+
+.departure {
+    flex: 1;
+}
+
+.route-border {
+    flex: 4;
+    border-bottom:1px solid black;
+    height: 0px;
+    margin-top:35px;
+}
+
+.arrival {
+    flex: 1;
+    text-align: right;
+}
+
+.duration{
+    flex: 1;
+    padding:15px 4px;
+    text-align: center;
+    font-size:12px;
+}
+
+.economy {
+    flex: 2;
+    margin:4px;
+    padding: 30px 4px;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.05);
+}
+
+.economy > .economy-selection{
+    flex: 1;
+}
+
+.economy > .economy-selection > label{
+    text-decoration: underline;
+    font-size:14px;
+    font-weight: 600;
+}
+
+.economy > .economy-price {
+    flex: 1;
+    text-align: center;
+}
+
+.business {
+    flex: 2;
+    margin:4px;
+    padding: 30px 4px;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 4px;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.05);
+}
+
+.business > .business-selection{
+    flex: 1;
+}
+
+.business > .business-selection > label{
+    text-decoration: underline;
+    font-size:14px;
+    font-weight: 600;
+}
+
+.business > .business-price {
+    flex: 1;
+    text-align: center;
+}
+
+.sub-categories {
+    display: flex;
+    margin:12px;
+    padding: 8px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.05);
+}
+

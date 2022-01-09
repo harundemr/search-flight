@@ -24,11 +24,9 @@ class App extends React.Component {
   render() {
     return (
     <div className="App">
-      <div className="content">
         {
           this.state.currentPage === 'SearchFlight' ? <SearchFlight navigate={this.openListPage} /> : <ListFlight filterData={this.state.filterData} />
         }
-      </div>
     </div>
   )};
 }

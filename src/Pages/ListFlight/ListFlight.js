@@ -1,13 +1,12 @@
 import './ListFlight.css';
 import React, { useState, setState } from 'react';
 import Flights from '../../Data/flights.json';
-import Flight from '../../Components/Flight';
+import Flight from '../../Components/Flight/Flight';
 
 class ListFlight extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log(Flights);
         this.jsonData = Flights;
         this.data = this.props.filterData;
     }
@@ -31,14 +30,14 @@ class ListFlight extends React.Component {
                         </div>
                         {
                             this.jsonData.flights.map(flight => {
-                                return (<Flight item={flight} />);
+                                return (<Flight item={flight} key={flight.id} />);
                             })
                         }
                     </div>
                 </div>
             </div>
         )
-    };
+    }
 }
 
 export default ListFlight;
