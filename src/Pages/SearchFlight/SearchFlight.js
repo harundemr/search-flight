@@ -1,5 +1,6 @@
 import React from 'react';
 import './SearchFlight.css';
+import JsonData from '../../Data/flights.json';
 
 class SearchFlight extends React.Component {
 
@@ -46,7 +47,7 @@ class SearchFlight extends React.Component {
                                 <i className="fas fa-plane-arrival"></i>
                             </div>
                             <div className='port-wrapper'>
-                                <input id="to-where" type="text" placeholder='Nereye' defaultValue="Antalya"/>
+                                <input id="to-where" type="text" placeholder='Nereye' defaultValue="Antalya" />
                             </div>
                         </div>
                         <div className='date-container'>
@@ -91,7 +92,7 @@ class SearchFlight extends React.Component {
                                             id="business-radio"
                                             value="business"
                                             checked={this.state.cabin === "business"}
-                                            onChange={this.onChangeRadio}/>
+                                            onChange={this.onChangeRadio} />
                                         <label for="business-radio">Business Class</label>
                                     </span>
                                 </div>
@@ -136,21 +137,35 @@ class SearchFlight extends React.Component {
 
         var whereFrom = document.getElementById("where-from").value;
         var toWhere = document.getElementById("to-where").value;
-        if(!whereFrom || !toWhere)
-        {
+        if (!whereFrom || !toWhere) {
             alert("lütfen tüm alanları doldurunuz.");
-            return ;
+            return;
         }
 
-        this.props.navigate(
-            {
+        var filteredFlight = JsonData.flights.filter((flight) => {
+            return flight.originAirport.city.name === whereFrom &&
+                flight.destinationAirport.city.name === toWhere;
+        });
+
+        if (filteredFlight.length > 0) {
+            var flightInfo = {
                 whereFrom: whereFrom,
                 toWhere: toWhere,
                 date: "02.02.2022",
                 cabin: this.state.cabin,
                 traveller: this.state.count
-            }
-        );
+            };
+            localStorage.setItem('where-from', whereFrom);
+            localStorage.setItem('to-where', toWhere);
+            localStorage.setItem('traveller-count', this.state.count);
+            this.props.navigate(flightInfo, filteredFlight);
+        }
+        else {
+            alert("Seçtiğiniz kriterler de bir uçuş bulunamadı. Lütfen tekrar deneyin.");
+        }
+
+
+
     }
 }
 export default SearchFlight;

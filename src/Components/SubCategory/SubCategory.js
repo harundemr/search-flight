@@ -43,13 +43,27 @@ class SubCategory extends React.Component {
                             <button className='btn-choose-flight' onClick={this.onClickChooseFlight}>Uçuşu Seç</button>
                             : <button className='btn-choose-flight' disabled>Uçuşu Seç</button>
                 }
-
             </div>
         );
     }
 
     onClickChooseFlight() {
-        this.props.navigate(true);
+        if (this.data.status === 'AVAILABLE') {
+            var amount = this.data.price.currency + ' ' + this.data.price.amount;
+            var totalAmount = this.data.price.currency + ' ' + this.data.price.amount * Number(localStorage.getItem('traveller-count'));
+            if (this.props.getPromoCode && this.cabin === 'economy' && this.data.brandCode === 'ecoFly') {
+                amount = this.data.price.currency + ' ' + this.data.price.amount / 2;
+                totalAmount = this.data.price.currency + ' ' + (this.data.price.amount / 2) * Number(localStorage.getItem('traveller-count'))
+            }
+
+            localStorage.setItem('cabin',this.cabin);
+            localStorage.setItem('amount', amount);
+            localStorage.setItem('total-amount', totalAmount);
+            this.props.navigate(true);
+        }
+        else {
+            this.props.navigate(false);
+        }
     }
 
 }

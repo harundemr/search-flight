@@ -11,11 +11,13 @@ class App extends React.Component {
 
     this.state = {
       currentPage: 'SearchFlight',
-      filterData: {},
+      filteredFlight: {},
+      searchData: {},
       isComplated: false
     }
 
-    this.openListPage = this.openListPage.bind(this);
+    this.openSearchFlight = this.openSearchFlight.bind(this);
+    this.openListFlight = this.openListFlight.bind(this);
     this.openCompletion = this.openCompletion.bind(this);
   }
 
@@ -24,23 +26,27 @@ class App extends React.Component {
       <div className="App">
         {
           this.state.currentPage === 'SearchFlight' ?
-            <SearchFlight navigate={this.openListPage} />
+            <SearchFlight navigate={this.openListFlight} />
             : this.state.currentPage === 'ListFlight' ?
-             <ListFlight navigate={this.openCompletion} filterData={this.state.filterData} />
-             : <Completion isComplated={this.state.isComplated} />
+             <ListFlight navigate={this.openCompletion} searchData={this.state.searchData} filteredFlight={this.state.filteredFlight} />
+             : <Completion navigate={this.openSearchFlight} isComplated={this.state.isComplated} />
         }
       </div>
     )
   }
 
-  openListPage(filterData) {
-    this.setState({ currentPage: 'ListFlight', filterData: filterData });
+  openSearchFlight() {
+    this.setState({ currentPage: 'SearchFlight'});
+  }
+  
+  openListFlight(searchData, filteredFlight) {
+    this.setState({ currentPage: 'ListFlight', searchData: searchData, filteredFlight: filteredFlight });
   }
 
   openCompletion(isComplated) {
-    console.log(isComplated)
     this.setState({ currentPage: 'Completion', isComplated: isComplated });
   }
+
 }
 
 export default App;

@@ -8,7 +8,14 @@ class Completion extends React.Component {
         super(props);
 
         this.isComplated = this.props.isComplated;
-        console.log(this.props)
+        this.whereFrom = localStorage.getItem('where-from');
+        this.toWhere = localStorage.getItem('to-where');
+        this.travellerCount = localStorage.getItem('traveller-count');
+        this.cabin = localStorage.getItem('cabin');
+        this.amount = localStorage.getItem('amount');
+        this.totalAmount = localStorage.getItem('total-amount');
+
+        this.onClickReturnBack = this.onClickReturnBack.bind(this);
     }
 
     render() {
@@ -21,23 +28,52 @@ class Completion extends React.Component {
                 <div className='main-completion'>
                     {
                         this.isComplated ?
-                            <div className='complated'>
-                                <Message type="success" content="Kabin seçiminiz tamamlandı!" />
+                            <div>
+                                <Message type="success" content="Kabin seçiminiz tamamlandı." />
+                                <table>
+                                    <tr>
+                                        <th>Nereden</th>
+                                        <th>Nereye</th>
+                                        <th>Yolcu Sayısı</th>
+                                        <th>Kabin</th>
+                                        <th>Birim Fiyat</th>
+                                    </tr>
+                                    <tr>
+                                        <td>{ this.whereFrom } </td>
+                                        <td>{ this.toWhere }</td>
+                                        <td>{ this.travellerCount }</td>
+                                        <td>{ this.cabin }</td>
+                                        <td>{ this.amount }</td>
+                                    </tr>
+                                </table>
                                 <div className='total'>
                                     <div className='title'>Toplam tutar</div>
-                                    <div className='amount'>TRY 470</div>
+                                    <div className='amount'>{this.totalAmount}</div>
+                                </div>
+                                <div className='return-back'>
+                                    <button onClick={this.onClickReturnBack}>Başa Dön</button>
                                 </div>
                             </div> :
-                            <div className='complated'>
+                            <div>
                                 <Message type="error" content="Kabin seçiminiz tamamlanamadı!" />
                                 <div className='return-back'>
-                                    <button>Başa Dön</button>
+                                    <button onClick={this.onClickReturnBack}>Başa Dön</button>
                                 </div>
                             </div>
                     }
                 </div>
             </div>
         );
+    }
+
+    onClickReturnBack() {
+        localStorage.removeItem('where-from');
+        localStorage.removeItem('to-where');
+        localStorage.removeItem('traveller-count');
+        localStorage.removeItem('cabin');
+        localStorage.removeItem('amount');
+        localStorage.removeItem('total-amount');
+        this.props.navigate();
     }
 }
 
