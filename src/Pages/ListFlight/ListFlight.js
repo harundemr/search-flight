@@ -10,16 +10,22 @@ class ListFlight extends React.Component {
 
         this.jsonData = Flights;
 
-        this.filteredJsonData = this.jsonData.flights.filter((flight) => {
-            return flight.originAirport.city.name === this.data.whereFrom &&
-                flight.destinationAirport.city.name === this.data.toWhere;
-        });
-
         this.state = {
-            promoCode: false
+            promoCode: false,
+            filteredJsonData: this.jsonData.flights.filter((flight) => {
+                return flight.originAirport.city.name === this.data.whereFrom &&
+                    flight.destinationAirport.city.name === this.data.toWhere;
+            }),
+            detailShow: false,
+            cabin: 'economy1',
+            isSortEconomy: false,
+            isSortDepertureDate: false
         };
 
+        this.onChangeRadio = this.onChangeRadio.bind(this);
         this.onChangePromoCode = this.onChangePromoCode.bind(this);
+        this.sortEconomyPrice = this.sortEconomyPrice.bind(this);
+        this.sortDepertureDate = this.sortDepertureDate.bind(this);
     }
 
     render() {
@@ -49,12 +55,19 @@ class ListFlight extends React.Component {
                     <div className='list-flights'>
                         <div className='sort-bar'>
                             <label>Sıralama Kriterleri </label>
-                            <button className='btn-sort'>Ekonomi Kabin Ücreti</button>
-                            <button className='btn-sort'>Kalkış Saat</button>
+                            <button className={this.state.isSortEconomy ? 'btn-sort sorted' : 'btn-sort'} onClick={this.sortEconomyPrice}>Ekonomi Kabin Ücreti</button>
+                            <button className={this.state.isSortDepertureDate ? 'btn-sort sorted' : 'btn-sort'} onClick={this.sortDepertureDate}>Kalkış Saat</button>
                         </div>
                         {
-                            this.filteredJsonData.map(flight => {
-                                return (<Flight item={flight} key={flight.id} getPromoCode={this.getPromoCode} />);
+                            this.state.filteredJsonData.map(flight => {
+                                return (
+                                    <Flight
+                                        key={flight.id}
+                                        item={flight}
+                                        onChangeRadio={this.onChangeRadio}
+                                        getDetailShow={this.getDetailShow}
+                                        getPromoCode={this.getPromoCode} />
+                                );
                             })
                         }
                     </div>
@@ -63,7 +76,22 @@ class ListFlight extends React.Component {
         );
     }
 
-    onChangePromoCode(event) {
+    onChangeRadio(event) {
+        this.setState({
+            cabin: event.target.value,
+            detailShow: false
+        }, () => {
+            this.setState({
+                detailShow: true
+            })
+        });
+    }
+
+    get getDetailShow() {
+        return this.state;
+    }
+
+    onChangePromoCode() {
         this.setState({
             promoCode: !this.state.promoCode
         })
@@ -71,6 +99,26 @@ class ListFlight extends React.Component {
 
     get getPromoCode() {
         return this.state.promoCode;
+    }
+
+    sortEconomyPrice() {
+        this.setState({
+            isSortEconomy: true,
+            isSortDepertureDate: false,
+            filteredJsonData: this.state.filteredJsonData.sort((a, b) => {
+                return a.fareCategories.ECONOMY.subcategories[0].price.amount - b.fareCategories.ECONOMY.subcategories[0].price.amount;
+            })
+        });
+    }
+
+    sortDepertureDate() {
+        this.setState({
+            isSortEconomy: false,
+            isSortDepertureDate: true,
+            filteredJsonData: this.state.filteredJsonData.sort((a, b) => {
+                return Number(a.departureDateTimeDisplay.split(':').join('')) - Number(b.departureDateTimeDisplay.split(':').join(''));
+            })
+        });
     }
 }
 

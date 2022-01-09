@@ -7,13 +7,6 @@ class Flight extends React.Component {
     constructor(props) {
         super(props);
         this.data = this.props.item;
-
-        this.state = {
-            detailShow: false,
-            cabin: 'economy1'
-        };
-
-        this.onChangeRadio = this.onChangeRadio.bind(this);
     }
 
     render() {
@@ -46,7 +39,7 @@ class Flight extends React.Component {
                                 type="radio"
                                 name="cabin"
                                 value={"economy" + this.data.id}
-                                onChange={this.onChangeRadio} />
+                                onChange={this.props.onChangeRadio} />
                             <label for={"economy-radio" + this.data.id}>ECONOMY</label>
                         </div>
                         <div className='economy-price'>
@@ -72,7 +65,7 @@ class Flight extends React.Component {
                                 type="radio"
                                 name="cabin"
                                 value={"business" + this.data.id}
-                                onChange={this.onChangeRadio} />
+                                onChange={this.props.onChangeRadio} />
                             <label for={"business-radio" + this.data.id}>BUSINESS</label>
                         </div>
                         <div className='business-price'>
@@ -89,35 +82,42 @@ class Flight extends React.Component {
                 </div>
 
                 {
-                    this.state.detailShow ?
-                        <div className='sub-categories'>
-                            {
-                                this.state.cabin.includes('economy') ?
-                                    this.data.fareCategories.ECONOMY.subcategories.map(category => {
+                    this.props.getDetailShow.detailShow ?
 
-                                        return (<SubCategory item={category} key={category.brandCode} cabin={'economy'} getPromoCode={this.props.getPromoCode} />);
+                        this.props.getDetailShow.cabin === 'economy' + this.data.id ?
+                            <div className='sub-categories'>
+                                {
+                                    this.data.fareCategories.ECONOMY.subcategories.map(category => {
+                                        return (
+                                            <SubCategory
+                                                item={category}
+                                                key={category.brandCode}
+                                                cabin={'economy'}
+                                                getPromoCode={this.props.getPromoCode} />);
                                     })
-                                    :
-                                    this.data.fareCategories.BUSINESS.subcategories.map(category => {
-                                        return (<SubCategory item={category} key={category.brandCode} cabin={'business'} getPromoCode={this.props.getPromoCode} />);
-                                    })
-                            }
-                        </div> : null
+                                }
+                            </div>
+                            :
+                            this.props.getDetailShow.cabin === 'business' + this.data.id ?
+                                <div className='sub-categories'>
+                                    {
+                                        this.data.fareCategories.BUSINESS.subcategories.map(category => {
+                                            return (
+                                                <SubCategory
+                                                    item={category}
+                                                    key={category.brandCode}
+                                                    cabin={'business'}
+                                                    getPromoCode={this.props.getPromoCode} />);
+                                        })
+                                    }
+                                </div> : null
+                        : null
                 }
             </div>
         );
     }
 
-    onChangeRadio(event) {
-        this.setState({
-            cabin: event.target.value,
-            detailShow: false
-        }, () => {
-            this.setState({
-                detailShow: true
-            })
-        });
-    }
+
 }
 
 export default Flight;
