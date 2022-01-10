@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# Uçuş Sorgulama Uygulaması
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Açıklama
 
-## Available Scripts
+ReactJs kullanarak geliştirilmiştir. \
+Herhangi bir css kütüphanesi kullanılmamıştır. Tasarımlar tamamen css ile sıfırdan yazılmıştır.\
+3 sayfadan oluşmaktadır.
 
-In the project directory, you can run:
+## Sayfalar
+### SearchFlight
 
-### `npm start`
+Uçuş sorgulama sayfasıdır.\
+Şehir seçimleri, yolcu sayısı ve kabin filtreleri kullanılabilmektedir.\
+Filtrelemeler Uçuş listeleme sayfasına geçmeden önce yapılır. \
+Sonuç 0 ise alert ile kullanıcı bilgilendirilir.\
+Sonuç 0 dan büyük ise uçuş listeleme sayfasına yönlendirir.\
+Tarih seçimi aktif değildir.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### ListFlight
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Uçuş listeleme sayfasıdır.\
+Önceki sayfadan seçilen bilgiler bu ekranın üst kısmında özet olarak gösterilir.\
+Promosyon kodu seçimi yapılabilir. \
+Promosyon kodu seçiminde emonomi kabininin ecoFly paketinde %50 indirim otomatik olarak uygulanır. \
+Promosyon kodu seçiminde economy kabininin ecoFly paketi haricindeki tüm paketler disabled olur.\
+Liste default olarak Ekonomi Kabin Ücreti ne göre sıralanmış olarak gelir. İstenirse kalkış saati butonu ile kalkış saatine göre sıralama yapılabilir.\
+Listedeki her bir uçuş için economy ve business seçimleri yapıldığında ilgili paketler ve özellikleri dropdown olarak açılır. \
+Uçuş seçim yapıldığında ilgili paketin 'status' ü kontrol edilip AVAILABLE ise 'Kabin seçimi tamamlandı' sayfasına yönlendirilir.\
+Bu aşamada uçuşa ait bilgiler 'Local Storage' ye kaydedilir.\
+'status', 'ERROR' ise 'Kabin seçimi tamamlanamadı' sayfasına yönlendirilir.
 
-### `npm test`
+### Complation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+İşlem bittiğinde kullanıcıya mesaj gösterek sayfadır.\
+Seçim başarıyla tamamlandıysa parametre olarak isComplate: true alır.\
+Seçim başarılıysa 'Local Storage' den uçuş bilgileri çekilir ve ekranda özet bilgi olarak gösterilir.\
+Başa dönme butonu ile uçuş sorgulama sayfasına tekrar dönülebilir. Bu aşamada 'Local Storage' temizlenir.
 
-### `npm run build`
+## Komponentler
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Flight
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Uçuş listeleme sayfasında listede görünen her bir uçuşa karşılık gelir. \
+Prop olarak uçuşa ait bilgileri alır.\
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### SubCategory
 
-### `npm run eject`
+Flight komponentinde kabin seçildiğinde dropdown olarak açılan paketlerin her birine karşılık gelir.\
+Prop olarak o kategoriye ait bilgileri alır.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Message
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Complation sayfasında gösterilen icon ve mesajın gösterimi için tasarlanmıştır.\
+Prop olarak type ve content almaktadır.\
+Type eğer 'success' ise yeşil tik iconu ile birlikte görünmektedir.\
+type eğer 'error' ise kırmızı çarpı iconu ile birlikte görünmektedir.
